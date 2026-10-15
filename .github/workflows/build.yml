@@ -43,6 +43,8 @@ concurrency:
 jobs:
   build-windows:
     name: Windows ${{ matrix.arch }} installer
+    # Fork CI only packages Linux.
+    if: ${{ false }}
     # Each arch builds NATIVELY, like the macOS job below. On an x64 runner every step
     # that keys off the host — fetch-ffmpeg (which also runs the binary it downloads to
     # verify the licence), fetch-onnxruntime, the compositor's cargo build — produced x64
@@ -159,6 +161,8 @@ jobs:
 
   build-windows-store:
     name: Windows Store package
+    # Fork CI only packages Linux.
+    if: ${{ false }}
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -287,6 +291,8 @@ jobs:
 
   build-macos:
     name: macOS ${{ matrix.arch }} DMG
+    # Fork CI only packages Linux.
+    if: ${{ false }}
     # Build each arch NATIVELY. `macos-latest` is Apple Silicon, and everything the
     # 1.8.0 macOS path added keys off the HOST arch: fetch-ffmpeg-macos.mjs configures
     # with `--arch=${process.arch}`, and build-macos-compositor-addon.mjs installs into
